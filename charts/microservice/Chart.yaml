@@ -1,0 +1,10 @@
+apiVersion: v2
+name: microservice
+description: "Helm chart para desplegar el microservicio Spring Boot"
+type: application
+
+# Versión del propio chart; cada vez que cambies plantillas, incrementa aquí (p.ej. 0.1.0 → 0.1.1)
+version: 0.1.0
+
+# Versión de la app (la versión de tu imagen Docker). Manténla sincronizada con la que publiques.
+appVersion: "0.0.1"

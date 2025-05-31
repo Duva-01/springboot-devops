@@ -1,0 +1,69 @@
+---
+# Source: microservice/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: prueba-microservice
+  labels:
+    helm.sh/chart: microservice-0.1.0
+    app.kubernetes.io/name: microservice
+    app.kubernetes.io/instance: prueba-microservice
+    app.kubernetes.io/version: "0.0.1"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: microservice
+    app.kubernetes.io/instance: prueba-microservice
+---
+# Source: microservice/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prueba-microservice
+  labels:
+    helm.sh/chart: microservice-0.1.0
+    app.kubernetes.io/name: microservice
+    app.kubernetes.io/instance: prueba-microservice
+    app.kubernetes.io/version: "0.0.1"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: microservice
+      app.kubernetes.io/instance: prueba-microservice
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: microservice-0.1.0
+        app.kubernetes.io/name: microservice
+        app.kubernetes.io/instance: prueba-microservice
+        app.kubernetes.io/version: "0.0.1"
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      containers:
+        - name: microservice
+          image: "microservice:0.0.1"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10

@@ -1,0 +1,33 @@
+# jenkins/jenkins-values.yaml  (mínimo)
+
+controller:
+  admin:
+    username: admin
+    password: admin123
+
+  persistence:
+    enabled: false        # sin PVC
+
+  installPlugins:         # SOLO lo esencial
+    - git:latest
+    - workflow-aggregator:latest   # (Pipeline)
+    - kubernetes-cli:latest        # kubectl y helm vía CLI
+    - docker-workflow:latest
+    - credentials-binding:latest
+
+  agent:
+    enabled: false
+
+  JCasC:                  # desactiva Configuration-as-Code
+    defaultConfig: false
+    configScripts: {}
+
+  sidecars:
+    configReload:
+      enabled: false
+
+agent:
+  enabled: false
+
+persistence:
+  enabled: false

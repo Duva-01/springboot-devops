@@ -1,0 +1,34 @@
+# -------------- Ignorar ficheros de sistema operativo --------------
+.DS_Store
+Thumbs.db
+
+# -------------- Ignorar salida de compilación de Maven --------------
+/microservice/target/
+/microservice/.mvn/wrapper/
+**/target/
+
+/**/.idea/
+/**/.vscode/
+/**/*.iml
+
+# -------------- Ignorar dependencias descargadas y empaquetados --------------
+/microservice/.mvn/wrapper/maven-wrapper.jar
+
+# -------------- Ignorar logs --------------
+*.log
+
+# -------------- Ignorar ficheros de Docker --------------
+docker-compose.override.yml
+# Si generas ficheros locales de build de Docker en otras carpetas, inclúyelos
+
+# -------------- Ignorar binarios generados por Kubernetes o Helm --------------
+/kubernetes/
+/helm-build-output/
+/charts/*.tgz
+
+# -------------- Ignorar ficheros generados por IDEs --------------
+*.class
+
+# -------------- Otros --------------
+*.zip
+*.tar.gz
